@@ -3,29 +3,28 @@
 using namespace std;
 
 int N, K;
-int x;
-char c;
-char loc[10001];
+int x; char c;
+int score[10001];
+int loc[100];
 
 int main() {
     cin >> N >> K;
-
-    int start = 1 << 30, end = 0, ret = 0;
-
+    
     for (int i = 0; i < N; i++) {
         cin >> x >> c;
-        loc[x] = c;
-        start = min(start, x);
-        end = max(end, x);
+        if (c == 'G') score[x] = 1;
+        else score[x] = 2;
+        loc[i] = x;
     }
 
-    for (int i = 1; i <= end; i++) {
-        int score = 0;
-        for (int j = 0; j <= K; j++) {
-            if (loc[i + j] == 'G') score += 1;
-            else if (loc[i + j] == 'H') score += 2;
+    int ret = 0;
+
+    for (int i = 0; i < N; i++) {
+        int lscore = 0;
+        for(int pos = loc[i]; pos <= loc[i] + K; pos++){
+            lscore += score[pos];
         }
-        ret = max(ret, score);
+        ret = max(ret, lscore);
     }
 
     cout << ret;
