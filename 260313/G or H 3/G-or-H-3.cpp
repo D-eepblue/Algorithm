@@ -21,7 +21,8 @@ int main() {
 
     for (int i = 0; i < N; i++) {
         int lscore = 0;
-        for(int pos = loc[i]; pos <= loc[i] + K; pos++){
+        int end = min(loc[i] + K, 10000);
+        for(int pos = loc[i]; pos <= end; pos++){
             lscore += score[pos];
         }
         ret = max(ret, lscore);
