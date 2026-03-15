@@ -11,7 +11,7 @@ int main() {
 
     for (int i = 0; i < N; i++) {
         cin >> candy >> pos;
-        road[pos] = candy;
+        road[pos] += candy;
     }
 
     int sum = 0;
