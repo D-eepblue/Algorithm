@@ -14,16 +14,16 @@ int main() {
         road[pos] += candy;
     }
 
-    int sum = 0;
-    pos = K;
+    int sum = 0, end = min(2 * K, 100);
+    int pos = K;
 
-    for (int i = 0; i <= pos + K; i++) {
+    for (int i = 0; i <= end; i++) {
         sum += road[i];
     }
-    
+
     int ret = sum;
 
-    while (pos++ <= 100 - K) {
+    while (pos++ <= 101 - K) {
         sum -= road[pos - K - 1];
         sum += road[pos + K];
         ret = max(ret, sum);
