@@ -23,7 +23,7 @@ int main() {
 
     int ret = sum;
 
-    while (pos++ <= 101 - K) {
+    while (++pos <= 101 - K) {
         sum -= road[pos - K - 1];
         sum += road[pos + K];
         ret = max(ret, sum);
