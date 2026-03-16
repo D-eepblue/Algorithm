@@ -32,15 +32,23 @@ int main() {
     sort(pos, pos + N);
 
     int left = 0, right = N - 1;
+    int dist = 0;
 
     while (left <= right) {
-        if (check(left, right)) break;
-        if (check(left + 1, right)) break;
-        if (check(left, right - 1))break;
+        if (check(left, right)) {
+            dist = max(dist, pos[right] - pos[left]);
+            break;
+        }
+        if (check(left + 1, right))
+            dist = max(dist, pos[right] - pos[left + 1]);
+
+        if (check(left, right - 1))
+            dist = max(dist, pos[right-1] - pos[left]);
+
         left++, right--;
     }
-    
-    cout << pos[right] - pos[left];
+
+    cout << dist;
 
     return 0;
 }
