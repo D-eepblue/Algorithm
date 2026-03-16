@@ -11,7 +11,7 @@ int pos[101];
 bool check(int left, int right) {
     int H = 0, G = 0;
 
-    for (int i = left; i <= right; i++) {
+    for (int i = left; i < right; i++) {
         int val = line[pos[i]];
         if (val == 1) H++;
         else if (val == 2) G++;
@@ -31,21 +31,14 @@ int main() {
 
     sort(pos, pos + N);
 
-    int left = 0, right = N - 1;
     int dist = 0;
 
-    while (left <= right) {
-        if (check(left, right)) {
-            dist = max(dist, pos[right] - pos[left]);
-            break;
+    for (int size = N; size > 0; size--) {
+        for (int start = 0; start <= N - size; start++) {
+            if (check(start, start + size)) {
+                dist = max(dist, pos[start + size - 1] - pos[start]);
+            }
         }
-        if (check(left + 1, right))
-            dist = max(dist, pos[right] - pos[left + 1]);
-
-        if (check(left, right - 1))
-            dist = max(dist, pos[right-1] - pos[left]);
-
-        left++, right--;
     }
 
     cout << dist;
