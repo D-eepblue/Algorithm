@@ -1,4 +1,5 @@
 #include <iostream>
+#include <algorithm>
 
 using namespace std;
 
@@ -13,6 +14,8 @@ int main() {
         cin >> P[i];
     }
 
+    sort(P, P + N);
+
     for (int i = 0; i < N; i++) {
         int cnt = 0;
         int money = B;
@@ -22,7 +25,7 @@ int main() {
                 price /= 2;
             }
             if (price > money) {
-                break;
+                continue;
             }
             money -= price;
             cnt++;
