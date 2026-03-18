@@ -4,41 +4,49 @@ using namespace std;
 
 int N, M, D, S;
 int p, m, t;
-int sp, st;
-bool xCheese[1001];
-int eat[1001][1001];
+int sick_p, sick_t;
+int sickInfo[51];
+int eatInfo[51][51];
 
 int main() {
     cin >> N >> M >> D >> S;
 
     for (int i = 0; i < D; i++) {
         cin >> p >> m >> t;
-        eat[p][m] = t;
+        eatInfo[p][m] = t;
     }
-
+    
     for (int i = 0; i < S; i++) {
-        cin >> sp >> st;
+        cin >> sick_p >> sick_t;
+        sickInfo[sick_p] = sick_t;
 
-        for (int chNum = 1; chNum <= M; chNum++) {
-            if (eat[sp][chNum] <= st && eat[sp][chNum] != 0) {
-                xCheese[chNum] = true;
-            }
-        }
+        
     }
 
     int cnt = 0;
+    int cheese = 0;
 
-    for (int chNum = 1; chNum <= M; chNum++) {
-        if (!xCheese[chNum]) continue;
+    // 상한 치즈를 선별
+    for (int cNum = 1; cNum <= M; cNum++) {
+        int sickCnt = 0;
         for (int pNum = 1; pNum <= N; pNum++) {
-            if (eat[pNum][chNum] != 0) {
-                cnt++;
-                break;
-            }
+            if (eatInfo[pNum][cNum] == 0) continue; // 안먹음
+            if (sickInfo[pNum] == 0) continue; // 아프지 않음
+            sickCnt++;
+        }
+        if (cnt < sickCnt) {
+            cnt = sickCnt;
+            cheese = cNum;
         }
     }
 
-    cout << cnt;
+    // 치즈를 먹은 사람 계산
+    int ret = 0;
+    
+    for (int pNum = 1; pNum <= N; pNum++) {
+        if (eatInfo[pNum][cheese] != 0) ret++;
+    }
+    cout << ret;
 
     return 0;
 }
