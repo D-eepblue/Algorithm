@@ -13,6 +13,7 @@ int main() {
 
     for (int i = 0; i < D; i++) {
         cin >> p >> m >> t;
+        if (eatInfo[p][m] != 0) t = min(t, eatInfo[p][m]);
         eatInfo[p][m] = t;
     }
     
