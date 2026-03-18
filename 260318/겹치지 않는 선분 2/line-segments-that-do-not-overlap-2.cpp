@@ -20,8 +20,12 @@ int main() {
                 flag = true;
                 break;
             }
+            if (x1[i] > x1[j] && x2[i] < x2[j]) {
+                flag = true;
+                break;
+            }
         }
-        if (flag) cnt+=2;
+        if (flag) cnt++;
     }
 
     cout << N - cnt;
