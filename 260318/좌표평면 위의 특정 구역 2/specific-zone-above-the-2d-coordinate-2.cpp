@@ -4,7 +4,7 @@ using namespace std;
 
 int N;
 int x[100], y[100];
-int ret = 1 << 30;
+int ret = (1 << 31) - 1;
 
 int main() {
     cin >> N;
