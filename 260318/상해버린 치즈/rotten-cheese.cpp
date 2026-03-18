@@ -19,8 +19,6 @@ int main() {
     for (int i = 0; i < S; i++) {
         cin >> sick_p >> sick_t;
         sickInfo[sick_p] = sick_t;
-
-        
     }
 
     int cnt = 0;
@@ -32,6 +30,7 @@ int main() {
         for (int pNum = 1; pNum <= N; pNum++) {
             if (eatInfo[pNum][cNum] == 0) continue; // 안먹음
             if (sickInfo[pNum] == 0) continue; // 아프지 않음
+            if (eatInfo[pNum][cNum] >= sickInfo[pNum]) continue;
             sickCnt++;
         }
         if (cnt < sickCnt) {
