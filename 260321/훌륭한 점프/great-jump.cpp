@@ -13,7 +13,7 @@ int main() {
 
     int ret = 1 << 30;
 
-    for (int i = 1; i < n - 1; i++) {
+    for (int i = 0; i < n; i++) {
         int key = arr[i];
         int cnt = 0;
         int dist = 0;
