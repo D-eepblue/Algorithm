@@ -17,6 +17,8 @@ int main() {
         int key = arr[i];
         int cnt = 0;
         int dist = 0;
+
+        if (arr[0] > key || arr[n - 1] > key) continue;
         for (int i = 0; i < n; i++) {
             if (arr[i] > key) cnt++;
             else {
