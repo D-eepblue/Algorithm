@@ -25,6 +25,9 @@ void remove(int pos1, int vel1, int pos2, int vel2) {
 }
 
 int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
     cin >> N >> T;
 
     for (int i = 0; i < N; i++) {
