@@ -9,6 +9,9 @@ int cnt[10001];
 priority_queue<int> pq;
 
 int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    
     cin >> N;
     for (int i = 1; i <= N; i++) {
         cin >> arr[i];
