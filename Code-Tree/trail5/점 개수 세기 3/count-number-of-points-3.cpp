@@ -11,6 +11,10 @@ set<int> points;
 unordered_map<int, int> umap;
 
 int main() {
+    // 빠른 입출력 설정
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    
     cin >> n >> q;
 
     for (int i = 0; i < n; i++) {
