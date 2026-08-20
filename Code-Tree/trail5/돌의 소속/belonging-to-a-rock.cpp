@@ -8,6 +8,7 @@ int prefix[100005][4];
 int a, b;
 
 int main() {
+    cin.tie(nullptr)->sync_with_stdio(false);
     cin >> N >> Q;
 
     for (int i = 1; i <= N; i++) {
