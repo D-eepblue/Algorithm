@@ -1,4 +1,3 @@
-#define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 #include <queue>
 #include <set>
@@ -122,7 +121,8 @@ int calc() {
 }
 
 int main() {
-    //freopen("input.txt", "r", stdin);
+    std::ios_base::sync_with_stdio(false);
+    std::cin.tie(NULL);
     cin >> Q;
 
     while (Q--) {
