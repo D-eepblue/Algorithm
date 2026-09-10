@@ -1,4 +1,3 @@
-#define _CRT_SECURE_NO_WARNINGS
 #include <queue>
 #include <vector>
 #include <iostream>
@@ -12,8 +11,6 @@
 
 using namespace std;
 using pii = pair<int, int>;
-
-constexpr int INF = (1 << 30);
 
 struct turtle {
     int row, col;
@@ -74,6 +71,7 @@ void move(turtle& t, int turn) {
     queue<qitem> q;
     bool visited[21][21] = { false, };
 
+    // 인접한 네 방향 중 이동 가능한 곳만 q에 삽입
     for (int i = 0; i < 4; i++) {
         int r = t.row + dr[i];
         int c = t.col + dc[i];
@@ -109,7 +107,7 @@ void move(turtle& t, int turn) {
 
     // 최단경로가 없는 경우
     if (ret_dir == -1) return;
-    
+
     // 거북이 이동
     grid[t.row][t.col] -= TURTLE;
     t.row += dr[ret_dir];
@@ -125,9 +123,6 @@ void move(turtle& t, int turn) {
 }
 
 int main() {
-    setbuf(stdout, NULL);
-    freopen("input.txt", "r", stdin);
-
     cin >> N >> M >> K;
 
     for (int i = 0; i < N; i++) {
@@ -150,14 +145,15 @@ int main() {
         grid[r][c] = VOLCANO;
     }
 
-    int cur_turn = 1, max_turn = 100;
     queue<volcano> q;
 
-    while (cur_turn <= max_turn) {
+    for(int turn = 1; turn <= 100; turn ++){
         // step1
         for (turtle& t : turtles) {
-            if(t.state == 0) move(t, cur_turn);
+            // 생존 중인 거북이만 이동
+            if (t.state == 0) move(t, turn);
         }
+
         // step2
         for (volcano& v : volcanoes) {
             v.cur_val += 10;
@@ -185,12 +181,11 @@ int main() {
                     heatmap[nr][nc] += heat;
 
                     if ((grid[nr][nc] & VOLCANO) && !eruption[nr][nc]) {
-                        volcano *v = findVolcano(nr, nc);
+                        volcano* v = findVolcano(nr, nc);
 
                         // 연쇄 분출
                         if (v->cur_val + heatmap[nr][nc] >= v->threshold) {
-                            q.push(volcano{v->row, v->col, v->threshold, v->cur_val});
-                            eruption[nr][nc] = true;
+                            q.push(volcano{ v->row, v->col, v->threshold, v->cur_val });
                         }
                     }
 
@@ -206,8 +201,7 @@ int main() {
             for (int j = 0; j < N; j++) {
                 if ((grid[i][j] & TURTLE) && heatmap[i][j] >= 20) {
                     grid[i][j] = FOSSIL;
-                    turtle* t = findTurtle(i, j);
-                    t->state = -1;
+                    findTurtle(i, j)->state = -1;
                 }
             }
         }
@@ -216,11 +210,9 @@ int main() {
         for (volcano& v : volcanoes) {
             if (v.cur_val >= v.threshold) v.cur_val = 0;
         }
-
-        cur_turn++;
     }
 
-    for (turtle t : turtles) {
+    for (turtle& t : turtles) {
         if (t.state == 0) cout << -1 << "\n";
         else cout << t.state << "\n";
     }
